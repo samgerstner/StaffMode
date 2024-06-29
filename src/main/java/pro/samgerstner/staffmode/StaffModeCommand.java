@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import java.sql.SQLException;
 
@@ -45,6 +46,7 @@ public class StaffModeCommand implements CommandExecutor
     {
         Permission permission = StaffMode.permission;
         SQLHelper sql = StaffMode.sql;
+        FileConfiguration config = StaffMode.config;
 
         //Verify that user has appropriate permission
         String permString = String.format("staffmode.%s", role);
@@ -90,6 +92,18 @@ public class StaffModeCommand implements CommandExecutor
             }
         }
 
+        //Check if god mode should be enabled
+        if(config.getBoolean("general-settings.enable-god-mode"))
+        {
+            player.setInvulnerable(true);
+        }
+
+        //Check if invisibility should be enabled
+        if(config.getBoolean("general-settings.enable-invisibility"))
+        {
+            player.setInvisible(true);
+        }
+
         //Use Vault API to add permission group for role
         permission.playerAddGroup(player, role);
 
@@ -102,6 +116,7 @@ public class StaffModeCommand implements CommandExecutor
     {
         Permission permission = StaffMode.permission;
         SQLHelper sql = StaffMode.sql;
+        FileConfiguration config = StaffMode.config;
 
         //Verify that user has appropriate permission
         String permString = String.format("staffmode.%s", role);
@@ -153,6 +168,18 @@ public class StaffModeCommand implements CommandExecutor
                       "There was an error logging the operation. Please contact your administrator.");
                 return true;
             }
+        }
+
+        //Check if god mode should be disabled
+        if(config.getBoolean("general-settings.enable-god-mode"))
+        {
+            player.setInvulnerable(false);
+        }
+
+        //Check if invisibility should be disabled
+        if(config.getBoolean("general-settings.enable-invisibility"))
+        {
+            player.setInvisible(false);
         }
 
         //Use Vault API to add permission group for role
