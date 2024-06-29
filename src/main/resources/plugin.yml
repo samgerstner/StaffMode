@@ -1,0 +1,8 @@
+name: StaffMode
+version: 1.0.0
+main: pro.samgerstner.staffmode.StaffMode
+depend: [Vault]
+commands:
+  staffmode:
+    description: The primary plugin command.
+    usage: /staffmode <enable|disable> <role>

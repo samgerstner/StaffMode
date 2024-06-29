@@ -1,0 +1,12 @@
+general-settings:
+  log-staffmode-enable: false
+  log-staffmode-disable: false
+  enable-invisibility: true
+  enable-god-mode: true
+
+database-settings:
+  host: localhost
+  port: 3306
+  database: staffmode
+  username: username
+  password: password
